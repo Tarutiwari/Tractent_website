@@ -1,0 +1,107 @@
+{% extends "../index.html" %}
+
+{% block title %}Agri Suggestions - Tractent{% endblock %}
+
+{% block content %}
+
+<style>
+    .agri-container {
+        max-width: 800px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+    }
+
+    .agri-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border-top: 4px solid #059669;
+    }
+
+    .agri-card h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 1rem;
+    }
+
+    .agri-icon {
+        font-size: 3.5rem;
+        color: #059669;
+        margin-bottom: 1rem;
+    }
+
+    .agri-card p {
+        font-size: 1.1rem;
+        color: #64748b;
+        margin-bottom: 2rem;
+        line-height: 1.8;
+    }
+
+    .agri-image {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-back {
+        display: inline-block;
+        padding: 12px 26px;
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+    }
+
+    .coming-soon-badge {
+        display: inline-block;
+        background: #fef3c7;
+        color: #92400e;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="agri-container">
+    <div class="agri-card">
+        <div class="coming-soon-badge">
+            <i class="fas fa-rocket"></i> Coming Soon
+        </div>
+
+        <div class="agri-icon">
+            <i class="fas fa-leaf"></i>
+        </div>
+
+        <h2>Agri Suggestions</h2>
+        <p>Get smart AI-powered recommendations based on your crops, soil types, and seasonal patterns. Our intelligent
+            system will help you optimize your farming practices for maximum yield.</p>
+
+        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=300&fit=crop"
+            alt="Agri AI Assistant" class="agri-image">
+
+        <a href="/tractorview" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Marketplace
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/agrisuggestion.js') }}"></script>
+{% endblock %}

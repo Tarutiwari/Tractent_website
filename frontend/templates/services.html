@@ -1,0 +1,182 @@
+{% extends "../index.html" %}
+{% block title %}Services - Tractent{% endblock %}
+
+{% block content %}
+
+<style>
+    .services-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+    }
+
+    .services-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .services-header h1 {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #1e293b;
+        margin: 0 0 0.5rem;
+    }
+
+    .services-header p {
+        font-size: 1.1rem;
+        color: #64748b;
+        margin: 0;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s ease;
+        border-top: 4px solid var(--primary-color);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -100px;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), transparent);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+        border-top-color: var(--secondary-color);
+    }
+
+    .service-card:hover::before {
+        right: -50px;
+    }
+
+    .service-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 0.8rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .service-card p {
+        color: #64748b;
+        line-height: 1.7;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+        .services-header h1 {
+            font-size: 2rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+</style>
+
+<div class="services-container">
+    <div class="services-header">
+        <h1><i class="fas fa-tractor"></i> Our Services</h1>
+        <p>Comprehensive agricultural solutions for modern farming</p>
+    </div>
+
+    <div class="services-grid">
+
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <h3>Tractor Rentals</h3>
+            <p>
+                Book verified tractors near your location at competitive hourly and daily rates.
+                Flexible scheduling with secure booking system and instant confirmation.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-store"></i>
+            </div>
+            <h3>List Your Tractor</h3>
+            <p>
+                Own a tractor? Earn passive income by listing it on Tractent.
+                Easy management of availability, pricing, and bookings.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h3>Smart Booking System</h3>
+            <p>
+                Secure booking with real-time availability tracking,
+                date validation, and comprehensive booking history management.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3>Farmer Support</h3>
+            <p>
+                Dedicated support for your agricultural needs and
+                expert guidance on machinery selection and usage.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Secure Accounts</h3>
+            <p>
+                Enterprise-grade password hashing, session protection,
+                and secure authentication ensuring your data safety.
+            </p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h3>Future Innovations</h3>
+            <p>
+                Coming soon: AI-powered crop advisory and intelligent
+                equipment recommendation systems.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

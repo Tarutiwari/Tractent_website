@@ -1,0 +1,182 @@
+{% extends "../index.html" %}
+
+{% block title %}Login - Tractent{% endblock %}
+
+{% block content %}
+<style>
+    .login-container {
+        width: 100%;
+        max-width: 480px;
+        margin: 4rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 12px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.3s ease-out;
+    }
+
+    .login-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #1e293b;
+        font-size: 0.95rem;
+    }
+
+    .input-group {
+        display: flex;
+        align-items: center;
+        border: 2px solid #d1f4e8;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        background: #f0fdf4;
+    }
+
+    .input-group:hover {
+        border-color: #059669;
+    }
+
+    .input-group:focus-within {
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+
+    .input-group i {
+        padding: 0 12px;
+        color: #059669;
+        font-size: 1.2rem;
+    }
+
+    .input-group input {
+        border: none;
+        outline: none;
+        flex: 1;
+        background: transparent;
+        padding: 12px 0;
+        font-size: 1rem;
+    }
+
+    .input-group input::placeholder {
+        color: #94a3b8;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #059669, #10b981);
+        border: none;
+        color: white;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .login-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+    }
+
+    .login-btn:active {
+        transform: translateY(0);
+    }
+
+    .flash {
+        padding: 12px;
+        margin-bottom: 1.5rem;
+        background-color: #fee2e2;
+        color: #dc2626;
+        border-radius: 6px;
+        text-align: center;
+        border-left: 4px solid #dc2626;
+        font-weight: 500;
+    }
+
+    .extra-links {
+        text-align: center;
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+        color: #64748b;
+    }
+
+    .extra-links a {
+        color: #059669;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .extra-links a:hover {
+        color: #047857;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<div class="login-container">
+    <h2><i class="fas fa-sign-in-alt"></i> Welcome Back</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form id="login-form">
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+        </div>
+
+        <button type="submit" class="login-btn">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+    </form>
+
+    <div class="extra-links">
+        Don't have an account? 
+        <a href="/signup">Create one</a>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

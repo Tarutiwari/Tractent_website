@@ -1,0 +1,6 @@
+flask
+gunicorn
+pymongo[srv]
+python-dotenv
+passlib[bcrypt]
+flask-cors

@@ -1,0 +1,152 @@
+{% extends "../index.html" %}
+
+{% block title %}My Booking History - Tractent{% endblock %}
+
+{% block content %}
+
+<style>
+    .history-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .history-header h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .btn-back {
+        padding: 12px 26px;
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.9rem;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+    }
+
+    .history-table-container {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border-top: 4px solid #059669;
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .history-table th {
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 700;
+    }
+
+    .history-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .history-table tbody tr:hover {
+        background-color: #f0f9ff;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .status-booked {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .status-rejected {
+        background: #fee2e2;
+        color: #7f1d1d;
+    }
+
+    .status-completed {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: #64748b;
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        color: #cbd5e1;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .history-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .history-table {
+            font-size: 0.9rem;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 0.75rem;
+        }
+    }
+</style>
+
+<div class="history-container">
+    <div class="history-header">
+        <h2><i class="fas fa-history"></i> My Booking History</h2>
+        <a href="{{ url_for('tractor_view') }}" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Marketplace
+        </a>
+    </div>
+
+    <div class="history-table-container">
+        <div id="history-container">
+            <!-- History will be loaded via history.js -->
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

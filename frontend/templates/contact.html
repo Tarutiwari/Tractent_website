@@ -1,0 +1,194 @@
+{% extends "../index.html" %}
+{% block title %}Contact Us - Tractent{% endblock %}
+
+{% block content %}
+
+<style>
+    .contact-container {
+        max-width: 600px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+    }
+
+    .contact-card {
+        background: white;
+        border-radius: 12px;
+        padding: 3rem;
+        box-shadow: var(--shadow-xl);
+        border-top: 4px solid var(--primary-color);
+    }
+
+    .contact-card h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #d1f4e8;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background: #f0fdf4;
+        color: #1e293b;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 140px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+    }
+
+    .contact-info-section {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 2px solid var(--border-color);
+    }
+
+    .contact-info-section h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .contact-info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .contact-info-item {
+        padding: 1rem;
+        border-radius: 8px;
+        background: var(--light-bg);
+    }
+
+    .contact-info-item i {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .contact-info-item p {
+        color: #64748b;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .success-message {
+        background: #d1fae5;
+        color: #059669;
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #059669;
+        display: none;
+    }
+</style>
+
+<div class="contact-container">
+    <div class="contact-card">
+        <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+
+        <div class="success-message">
+            Thank you for contacting us! We'll get back to you shortly.
+        </div>
+
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name"><i class="fas fa-user"></i> Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject"><i class="fas fa-heading"></i> Subject</label>
+                <input type="text" id="subject" name="subject" placeholder="How can we help?" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message"><i class="fas fa-message"></i> Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+
+        <div class="contact-info-section">
+            <h3>Get in Touch</h3>
+            <div class="contact-info-grid">
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>support@tractent.com</p>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+91 98765 43210</p>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Smart Agriculture Hub, India</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+{% endblock %}

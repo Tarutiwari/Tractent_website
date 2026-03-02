@@ -1,0 +1,452 @@
+{% extends "../index.html" %}
+
+{% block title %}My Profile - Tractent{% endblock %}
+
+{% block content %}
+<style>
+    .profile-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+    }
+
+    .profile-sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+        position: sticky;
+        top: 2rem;
+        border-top: 4px solid #059669;
+    }
+
+    .profile-avatar {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #059669;
+        margin: 0 auto 1.5rem;
+        display: block;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+
+    .profile-email {
+        text-align: center;
+        color: #64748b;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-info-item {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .profile-info-item:last-child {
+        border-bottom: none;
+    }
+
+    .profile-info-label {
+        font-weight: 600;
+        color: #64748b;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+
+    .profile-info-value {
+        color: #1e293b;
+        font-weight: 500;
+    }
+
+    .profile-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+    }
+
+    .btn-profile {
+        padding: 12px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+    }
+
+    .btn-edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+    }
+
+    .btn-history {
+        background: #ecfdf5;
+        color: #059669;
+        border: 2px solid #059669;
+    }
+
+    .btn-history:hover {
+        background: #059669;
+        color: white;
+    }
+
+    .profile-main {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .profile-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+        border-top: 4px solid #059669;
+    }
+
+    .profile-card h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #d1f4e8;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #f0fdf4;
+        color: #1e293b;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #059669;
+        box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stat-item {
+        background: #ecfdf5;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #059669;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+        color: #64748b;
+        font-weight: 500;
+        margin-top: 0.3rem;
+    }
+
+    .booking-item {
+        background: #ecfdf5;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border-left: 4px solid #059669;
+    }
+
+    .booking-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.8rem;
+    }
+
+    .booking-title {
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    .status-badge {
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .status-pending {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .status-booked {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .status-rejected {
+        background: #fee2e2;
+        color: #7f1d1d;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .action-btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-approve {
+        background: #10b981;
+        color: white;
+    }
+
+    .btn-approve:hover {
+        background: #059669;
+    }
+
+    .btn-reject {
+        background: #ef4444;
+        color: white;
+    }
+
+    .btn-reject:hover {
+        background: #dc2626;
+    }
+
+    .file-label {
+        display: block;
+        padding: 12px 24px;
+        background: #ecfdf5;
+        color: #059669;
+        border: 2px dashed #059669;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .file-label:hover {
+        background: #059669;
+        color: white;
+    }
+
+    @media (max-width: 968px) {
+        .profile-container {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-sidebar {
+            position: static;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .profile-container {
+            padding: 1rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .booking-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+</style>
+
+<div class="profile-container">
+    <!-- LEFT SIDEBAR -->
+    <div class="profile-sidebar">
+        <img id="display-photo" class="profile-avatar"
+            src="{{ url_for('static', filename='profile_photos/default.png') }}" alt="Profile Photo"
+            onerror="this.onerror=null;this.src='/static/profile_photos/default.png'">
+
+        <h2 class="profile-name" id="display-username-2">Loading...</h2>
+        <div class="profile-email" id="display-email">Loading...</div>
+
+        <div class="profile-info-item">
+            <span class="profile-info-label"><i class="fas fa-map-marker-alt"></i> Address</span>
+            <div class="profile-info-value" id="display-address">Not set</div>
+        </div>
+
+        <div class="profile-info-item">
+            <span class="profile-info-label"><i class="fas fa-phone"></i> Contact</span>
+            <div class="profile-info-value" id="display-contact">Not set</div>
+        </div>
+
+        <div class="profile-actions">
+            <a href="#edit-profile" class="btn-profile btn-edit">
+                <i class="fas fa-edit"></i> Edit Profile
+            </a>
+            <a href="{{ url_for('history_bhai') }}" class="btn-profile btn-history">
+                <i class="fas fa-history"></i> Booking History
+            </a>
+        </div>
+    </div>
+
+    <!-- RIGHT MAIN PANEL -->
+    <div class="profile-main">
+
+        <!-- Activity Stats -->
+        <div class="profile-card">
+            <h3><i class="fas fa-chart-bar"></i> Your Activity</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="total-bookings">0</div>
+                    <div class="stat-label">Total Bookings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="active-bookings">0</div>
+                    <div class="stat-label">Active</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="completed-bookings">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Bookings -->
+        <div class="profile-card">
+            <h3><i class="fas fa-calendar"></i> My Booking History</h3>
+            <div id="history-container">
+                <!-- Loaded via history.js -->
+            </div>
+        </div>
+
+        <!-- Incoming Requests -->
+        <div class="profile-card">
+            <h3><i class="fas fa-inbox"></i> Incoming Tractor Requests</h3>
+            <div id="incoming-requests-container">
+                <!-- Loaded via JS -->
+            </div>
+        </div>
+
+        <!-- Edit Profile Form -->
+        <div class="profile-card" id="edit-profile">
+            <h3><i class="fas fa-user-edit"></i> Edit Profile</h3>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label for="input-address"><i class="fas fa-map-marker-alt"></i> Address</label>
+                    <input type="text" id="input-address" name="address" placeholder="Enter your address">
+                </div>
+                <div class="form-group">
+                    <label for="input-contact"><i class="fas fa-phone"></i> Contact Number</label>
+                    <input type="tel" id="input-contact" name="contact" placeholder="Enter your contact number">
+                </div>
+                <button type="submit" class="btn-save">
+                    <i class="fas fa-check"></i> Save Changes
+                </button>
+            </form>
+        </div>
+
+        <!-- Upload Photo Form -->
+        <div class="profile-card">
+            <h3><i class="fas fa-camera"></i> Upload Profile Photo</h3>
+            <form id="photo-upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="file-label" for="photo-input">
+                        <i class="fas fa-cloud-upload-alt"></i> Choose Photo
+                    </label>
+                    <input type="file" id="photo-input" name="photo" accept="image/*" required style="display: none;">
+                </div>
+                <button type="submit" class="btn-save">
+                    <i class="fas fa-upload"></i> Upload Photo
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

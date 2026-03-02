@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Booking History</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff7ed;
+        }
+
+        header {
+            background: linear-gradient(90deg, #fb923c, #f97316);
+            padding: 18px 40px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 40px 60px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #c2410c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+        }
+
+        th {
+            background: #f97316;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background-color: #fff1e6;
+        }
+
+        .empty {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 18px;
+            color: #9a3412;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            background: #fed7aa;
+            color: #9a3412;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>📜 My Booking History</h2>
+    <a href="/tractors">← Back to Marketplace</a>
+</header>
+
+<div class="container">
+
+{% if bookings %}
+    <table>
+        <tr>
+            <th>Booking ID</th>
+            <th>Tractor ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+
+        {% for booking in bookings %}
+        <tr>
+            <td>{{ booking.booking_id }}</td>
+            <td>{{ booking.tractor_id }}</td>
+            <td>{{ booking.start_date }}</td>
+            <td>{{ booking.end_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <div class="empty">
+        You haven't booked any tractors yet.
+    </div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
