@@ -429,4 +429,5 @@ def api_upload_profile_photo():
 
 if __name__ == "__main__":
     # use_reloader=False prevents OSError 10038 (Windows socket bug with watchdog)
-    app.run(debug=True, use_reloader=False)
+    # app.run(debug=True, use_reloader=False)
+    app.run(host="0.0.0.0" , port = int(os.environ.get("PORT" , 10000)), debug = False)
